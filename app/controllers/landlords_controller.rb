@@ -5,4 +5,12 @@ class LandlordsController < ApplicationController
         render :index
     end
 
+    def create
+        @landlord = Landlord.create(
+            name: params[:name],
+            city: params[:city]
+        )
+        render :show
+    end
+
 end
