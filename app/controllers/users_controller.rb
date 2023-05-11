@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
 
+    def index
+      @users = User.all
+      render :index
+    end
+
     def new
         @user = User.new
         render template: "users/new"
@@ -7,16 +12,15 @@ class UsersController < ApplicationController
    
       def create
         @user = User.new(
-          name: params[:user][:name],
-          email: params[:user][:email],
-          password: params[:user][:password],
-          password_confirmation: params[:user][:password_confirmation],
+          name: params[:name],
+          email: params[:email],
+          password: params[:password],
+          password_confirmation: params[:password_confirmation]
         )
         if @user.save
-          session[:user_id] = @user.id
-          redirect_to "/"
+          render json: { message: "User created successfully" }, status: :created
         else
-          render :new, status: :unprocessable_entity
+          render json: { errors: user.errors.full_messages }, status: :bad_request
         end
       end
 
