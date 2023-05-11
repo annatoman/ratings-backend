@@ -11,7 +11,17 @@ class LandlordsControllerTest < ActionDispatch::IntegrationTest
 
   test "create" do
       assert_difference "Landlord.count", 1 do
-        post "/landlords.json", params: {name: "Matt Potter", city: "Chicago"}
+        post "/landlords.json",
+        params: {name: "Matt Potter", city: "Chicago"}
     end
   end
+
+  test "show" do
+    get "/landlords/#{Landlord.first.id}.json"
+    assert_response 200
+
+    data = JSON.parse(response.body)
+    assert_equal ["id", "name", "city"], data.keys
+  end
+
 end
