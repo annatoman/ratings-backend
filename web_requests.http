@@ -1,0 +1,22 @@
+### Landlord create
+POST http://localhost:3000/landlords.json
+Authorization: Bearer {}
+Content-Type: application/json
+
+{
+  "name": "Test name",
+  "city": "City"
+}
+
+###
+## User create
+
+POST http://localhost:3000/users.json
+Content-Type: application/json
+
+{
+    "name": "Anna",
+    "email": "test@test.com",
+    "password": "password",
+    "password_confirmation": "password"
+}
